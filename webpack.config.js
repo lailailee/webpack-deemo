@@ -10,7 +10,7 @@ const config = {
     rules: [
       {
         test: /\.(scss|sass)$/,
-        use: ['style-loader', 'css-loader']
+        use: ['style-loader', 'css-loader', 'sass-loader']
       },
     ]
   }
