@@ -1,7 +1,9 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
-
+const { CleanWebpackPlugin }
+  = require('clean-webpack-plugin')
+const CopyWebpackPlugins = require('copy-webpack-plugin')
 const config = {
   entry: './src/index.js',
   output: {
@@ -14,6 +16,10 @@ const config = {
         test: /\.(scss|sass)$/,
         use: ['style-loader', 'css-loader', 'sass-loader']
       },
+      {
+        test: /\.js$/,
+        use: ['babel-loader']
+      },
     ]
   },
   plugins: [
@@ -21,7 +27,14 @@ const config = {
       filename: 'index.html',
       template: 'index.html'
     }),
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new CleanWebpackPlugin(),
+    new CopyWebpackPlugins([
+      {
+        from: path.join(__dirname, 'assets'),
+        to: 'assets'
+      }
+    ])
   ]
 }
 
